@@ -2,10 +2,10 @@
 const { src, dest, watch, series, parallel } = require('gulp');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const concat = require('concat');
-const postcss = require('postcss');
-const replace = require('replace');
-const sass = require('sass');
+const concat = require('gulp-concat');
+const postcss = require('gulp-postcss');
+const replace = require('gulp-replace');
+const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 
@@ -20,7 +20,7 @@ function scssTask() {
   return src(files.scssPath)
     .pipe(sourcemaps.init())
     .pipe(sass())
-    .pipe(postcss[(autoprefixer(), cssnano())])
+    .pipe(postcss([(autoprefixer(), cssnano())]))
     .pipe(sourcemaps.write('.'))
     .pipe(dest('dist'));
 }
